@@ -19,10 +19,9 @@ public class Movie implements Serializable {
     private Integer year;
     private String imgUrl;
     private String synopsis;
-    @JoinTable( name = "tb_movie_review",
-            joinColumns = @JoinColumn(name = "movie_id"),
-            inverseJoinColumns = @JoinColumn(name = "review_id"))
+    @OneToMany(mappedBy = "movie")
     private Set<Review> reviews = new HashSet<>();
+    @ManyToOne
     @JoinColumn( name = "genre_id")
     private Genre genre;
 

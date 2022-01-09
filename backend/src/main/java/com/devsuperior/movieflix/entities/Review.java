@@ -13,8 +13,10 @@ public class Review implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String text;
+    @ManyToOne
     @JoinColumn( name = "movie_id")
     private Movie movie;
+    @ManyToOne
     @JoinColumn( name = "user_id")
     private User user;
 

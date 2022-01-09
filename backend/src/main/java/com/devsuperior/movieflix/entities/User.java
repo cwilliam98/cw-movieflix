@@ -17,10 +17,7 @@ public class User implements Serializable {
     private String name;
     private String email;
     private String password;
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable( name = "tb_user_review",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "review_id"))
+    @OneToMany(mappedBy = "user")
     private Set<Review> reviews = new HashSet<>();
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable( name = "tb_user_role",
