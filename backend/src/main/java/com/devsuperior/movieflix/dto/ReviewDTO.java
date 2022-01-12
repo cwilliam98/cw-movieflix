@@ -1,8 +1,9 @@
 package com.devsuperior.movieflix.dto;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+
+import com.devsuperior.movieflix.entities.Review;
 
 
 public class ReviewDTO implements Serializable {
@@ -12,14 +13,23 @@ public class ReviewDTO implements Serializable {
     private Long id;
     private String text;
     private Long movieId;
+    private Long userId;
 
     public ReviewDTO() {
     }
 
-    public ReviewDTO(Long id, String text, Long movieId) {
+    public ReviewDTO(Long id, String text, Long movieId, Long userId) {
         this.id = id;
         this.text = text;
         this.movieId = movieId;
+        this.userId = userId;
+    }
+    
+    public ReviewDTO(Review entity) {
+    	this.id = entity.getId();
+        this.text = entity.getText(); 
+        this.movieId = entity.getMovie().getId();
+        this.userId = entity.getUser().getId();
     }
 
     public Long getId() {
@@ -45,8 +55,16 @@ public class ReviewDTO implements Serializable {
     public void setMovieId(Long movieId) {
         this.movieId = movieId;
     }
+    
+    public Long getUserId() {
+		return userId;
+	}
 
-    @Override
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof ReviewDTO)) return false;
