@@ -1,10 +1,8 @@
 package com.devsuperior.movieflix.dto;
 
-import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+
+import com.devsuperior.movieflix.entities.User;
 
 public class UserDTO implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -12,20 +10,20 @@ public class UserDTO implements Serializable {
     private Long id;
     private String name;
     private String email;
-    private String password;
-    private Set<ReviewDTO> reviews = new HashSet<>();
-    private Set<RoleDTO> roles = new HashSet<>();
-
+    
     public UserDTO() {
     }
 
-    public UserDTO(Long id, String name, String email, String password, Set<ReviewDTO> reviews, Set<RoleDTO> roles) {
+    public UserDTO(Long id, String name, String email) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.password = password;
-        this.reviews = reviews;
-        this.roles = roles;
+    }
+    
+    public UserDTO(User user) {
+    	this.id = user.getId();
+        this.name = user.getName();
+        this.email = user.getEmail();
     }
 
     public Long getId() {
@@ -50,43 +48,5 @@ public class UserDTO implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Set<ReviewDTO> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(ReviewDTO userReview) {
-        this.reviews.add(userReview);
-    }
-
-    public void setReviews(Set<ReviewDTO> reviews) {
-        this.reviews = reviews;
-    }
-
-    public Set<RoleDTO> getRoles() {
-        return roles;
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof UserDTO)) return false;
-        UserDTO user = (UserDTO) o;
-        return email.equals(user.email);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(email);
     }
 }
