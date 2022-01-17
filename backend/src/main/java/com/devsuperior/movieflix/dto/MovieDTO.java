@@ -1,9 +1,13 @@
 package com.devsuperior.movieflix.dto;
 
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+
+import com.devsuperior.movieflix.entities.Movie;
+import com.devsuperior.movieflix.entities.Review;
 
 public class MovieDTO implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -14,13 +18,28 @@ public class MovieDTO implements Serializable {
     private Integer year;
     private String imgUrl;
     private String synopsis;
-    private Set<ReviewDTO> reviews = new HashSet<>();
+    private List<ReviewDTO> reviews = new ArrayList<>();
     private Long genreId;
 
     public MovieDTO() {
     }
+    
+    public MovieDTO(Movie entity, Set<Review> reviews) {
+    	 this(entity);
+         reviews.forEach(rev -> this.reviews.add(new ReviewDTO(rev)));
+    }
+    
+    public MovieDTO(Movie entity) {
+   	 this.id = entity.getId();
+        this.title = entity.getTitle();
+        this.subTitle = entity.getSubTitle();
+        this.year = entity.getYear();
+        this.imgUrl = entity.getImgUrl();
+        this.synopsis = entity.getSynopsis();
+        this.genreId = entity.getGenre().getId();
+   }
 
-    public MovieDTO(Long id, String title, String subTitle, Integer year, String imgUrl, String synopsis, Set<ReviewDTO> reviews, Long genreId) {
+    public MovieDTO(Long id, String title, String subTitle, Integer year, String imgUrl, String synopsis, List<ReviewDTO> reviews, Long genreId) {
         this.id = id;
         this.title = title;
         this.subTitle = subTitle;
@@ -79,23 +98,23 @@ public class MovieDTO implements Serializable {
         this.synopsis = synopsis;
     }
 
-    public Set<ReviewDTO> getReviews() {
+    public List<ReviewDTO> getReviews() {
         return reviews;
     }
 
-    public void setReviews(Set<ReviewDTO> reviews) {
+    public void setReviews(List<ReviewDTO> reviews) {
         this.reviews = reviews;
     }
 
     public Long getGenreId() {
-        return genreId;
-    }
+		return genreId;
+	}
 
-    public void setGenreId(Long genreId) {
-        this.genreId = genreId;
-    }
+	public void setGenreId(Long genreId) {
+		this.genreId = genreId;
+	}
 
-    @Override
+	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof MovieDTO)) return false;

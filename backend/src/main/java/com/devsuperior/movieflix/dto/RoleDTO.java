@@ -1,6 +1,5 @@
 package com.devsuperior.movieflix.dto;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 

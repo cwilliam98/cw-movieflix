@@ -33,7 +33,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	
 	private static final String[] MEMBER = {"/reviews/**"};
 	
-	private static final String[] VISITOR_OR_MEMBER = {"/genres/**"};
+	private static final String[] VISITOR_OR_MEMBER = {"/genres/**", "/movies/**"};
 
 
 	@Override

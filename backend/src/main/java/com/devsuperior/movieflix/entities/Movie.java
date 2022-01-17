@@ -19,10 +19,10 @@ public class Movie implements Serializable {
     private Integer year;
     private String imgUrl;
     private String synopsis;
-    @OneToMany(mappedBy = "movie")
+    @OneToMany(mappedBy = "movie", fetch = FetchType.EAGER)
     private Set<Review> reviews = new HashSet<>();
     @ManyToOne
-    @JoinColumn( name = "genre_id")
+    @JoinColumn(name = "genre_id")
     private Genre genre;
 
     public Movie() {
